@@ -81,7 +81,7 @@ public class MapGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         if ((Time.time - lastTick >= tPerGeneration || fullSpeed) && currentGen <= Generations && !staleMatrix)
         {
             int[,] newMatrix = SelviytymisTaistelu(lastMatrix, out changes, out deaths, out births);
@@ -346,14 +346,20 @@ public class MapGenerator : MonoBehaviour
 
     public void Save()
     {
-        if (File.Exists(fileName) && !overWritePrompt)
+        string filepath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments);
+        filepath += "\\Sopulit";
+        Directory.CreateDirectory(filepath);
+
+        filepath += "\\" + fileName;
+
+        if (File.Exists(filepath) && !overWritePrompt)
         {
             sButtonText.text = "Overwrite?";
             overWritePrompt = true;
         }else
         {
             sButtonText.text = "Saved!";
-            StreamWriter sr = File.CreateText(fileName);
+            StreamWriter sr = File.CreateText(filepath);
 
             sr.WriteLine("Random seeded populations, ran on " + System.DateTime.Now);
             sr.WriteLine(populationNumber + " populations in " + Time.time + " seconds");
