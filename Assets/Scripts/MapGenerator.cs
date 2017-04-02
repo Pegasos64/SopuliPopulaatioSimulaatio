@@ -76,6 +76,8 @@ public class MapGenerator : MonoBehaviour
 
         sButtonText = SaveButton.GetComponentInChildren<Text>();
 
+        Debug.Log("Penis");
+
     }
 
     // Update is called once per frame
