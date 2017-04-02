@@ -34,6 +34,7 @@ public class MapGenerator : MonoBehaviour
     private int deaths, births, changes;
     private int t_deaths, t_births, t_changes;
     private int[,] matrix1, matrix2, matrix3, matrix4, matrix5, matrix6, matrix7, matrix8, matrix9;
+    private int[,] matrix10, matrix11, matrix12, matrix13, matrix14;
 
     private int[,] LongestMatrix;
     private int[,] ShortestMatrix;
@@ -75,8 +76,6 @@ public class MapGenerator : MonoBehaviour
         t_changes = 0;
 
         sButtonText = SaveButton.GetComponentInChildren<Text>();
-
-        Debug.Log("Penis");
 
     }
 
@@ -139,6 +138,11 @@ public class MapGenerator : MonoBehaviour
     public bool CheckStaleness(int[,] currentMatrix)
     {
         //Siirretään muistissa olevia matriiseja yhdellä eteenpäin, ja poistetaan vanhin
+        matrix14 = matrix13;
+        matrix13 = matrix12;
+        matrix12 = matrix11;
+        matrix11 = matrix10;
+        matrix10 = matrix9; 
         matrix9 = matrix8;
         matrix8 = matrix7;
         matrix7 = matrix6;
@@ -160,14 +164,19 @@ public class MapGenerator : MonoBehaviour
         Matrices.Add(matrix7);
         Matrices.Add(matrix8);
         Matrices.Add(matrix9);
+        Matrices.Add(matrix10);
+        Matrices.Add(matrix11);
+        Matrices.Add(matrix12);
+        Matrices.Add(matrix13);
+        Matrices.Add(matrix14);
 
         //Tarkistetaank
-        foreach(int[,] m in Matrices)
+        foreach (int[,] m in Matrices)
         {
             if (m == null) return false;
         }
 
-        bool[] sameAs = { true, true, true, true, true, true, true, true, true };
+        bool[] sameAs = { true, true, true, true, true, true, true, true, true, true, true, true, true, true};
         for (int i = 0; i < currentMatrix.GetLength(0); i++)
         {
             for (int j = 0; j < currentMatrix.GetLength(1); j++)
